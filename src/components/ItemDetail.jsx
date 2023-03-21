@@ -1,36 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ItemCount from "./itemCount";
 import { useParams } from "react-router-dom";
+
 import {
-  Spacer,
+  
   StackDivider,
   useColorModeValue,
   Box,
-  List,
-  ListItem,
+  
   Image,
   Stack,
   Container,
   SimpleGrid,
   Heading,
   Text,
-  Button,
+  
   VStack,
   Flex,
-  ButtonGroup,
-  IconButton,
+  
 } from "@chakra-ui/react";
-import { AddIcon, MinusIcon, TimeIcon } from "@chakra-ui/icons";
-import { useState } from "react";
-
-const ItemDetail = (products) => {
+import { TimeIcon } from "@chakra-ui/icons";
+import { getFirestore, getDoc, doc } from "firebase/firestore";
+const ItemDetail = ({products}) => {
+  const [producto, setProducto] = useState([])
   const { id } = useParams();
-  const itemFilter = products.products.filter((item) => item.id == id);
-  const [count, setCount] = useState(1);
-  const handleResetCount = () => {
-    setCount(1);
-  };
+  useEffect(() => {
+    const db = getFirestore();
 
-  console.log(count);
+    const itemRef = doc(db, "ropa", `${id}`);
+
+    getDoc(itemRef).then((snapshot) => {
+      if (snapshot.exists()) {
+        setProducto(snapshot.data());
+      } else {
+        console.log("Document does not exist.");
+      }
+    });
+  }, []);
+  const itemFilter = products.filter((item) => item.id == id);
+
   return (
     <>
       {itemFilter.map((item) => (
@@ -86,7 +94,7 @@ const ItemDetail = (products) => {
                   >
                     {item.description}
                   </Text>
-                  <Text fontSize={"lg"}>{item.description}</Text>
+                  
                 </VStack>
                 <Box>
                   <Text
@@ -100,69 +108,14 @@ const ItemDetail = (products) => {
                   </Text>
                 </Box>
               </Stack>
-              <ButtonGroup>
-                <Button
-                  py={"7"}
-                  onClick={() => {
-                    if (count > 1) {
-                      setCount(count - 1);
-                    }
-                  }}
-                  bg={useColorModeValue("gray.900", "gray.50")}
-                  color={useColorModeValue("white", "gray.900")}
-                  textTransform={"uppercase"}
-                  _hover={{
-                    transform: "translateY(2px)",
-                    boxShadow: "lg",
-                  }}
-                >
-                  -
-                </Button>
-                <Spacer />
-                <Text
-                  fontSize={"3xl"}
-                  color={useColorModeValue("yellow.500", "yellow.300")}
-                  fontWeight={"500"}
-                  textTransform={"uppercase"}
-                  mb={"4"}
-                >
-                  {item.stock > 0 ? count : "0"}
-                </Text>
-                <Spacer />
-                <Button
-                  py={"7"}
-                  onClick={() => {
-                    if (count < item.stock) {
-                      setCount(count + 1);
-                    }
-                  }}
-                  bg={useColorModeValue("gray.900", "gray.50")}
-                  color={useColorModeValue("white", "gray.900")}
-                  textTransform={"uppercase"}
-                  _hover={{
-                    transform: "translateY(2px)",
-                    boxShadow: "lg",
-                  }}
-                >
-                  +
-                </Button>
-                <Spacer />
-                <Button
-                  onClick={handleResetCount}
-                  rounded={"none"}
-                  width={"full"}
-                  py={"7"}
-                  bg={useColorModeValue("gray.900", "gray.50")}
-                  color={useColorModeValue("white", "gray.900")}
-                  textTransform={"uppercase"}
-                  _hover={{
-                    transform: "translateY(2px)",
-                    boxShadow: "lg",
-                  }}
-                >
-                  Añadir al Carrito
-                </Button>
-              </ButtonGroup>
+              <>
+              <ItemCount
+              id={item.id}
+              stock={item.stock}
+              price={item.price}
+              name={item.name}
+              />
+              </>
 
               <Stack
                 direction="row"

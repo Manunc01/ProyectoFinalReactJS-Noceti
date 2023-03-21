@@ -1,17 +1,13 @@
 import React from "react";
-import remeraImage from "../assets/images/remeraroja.png";
 import {
   useColorModeValue,
   Flex,
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Stack,
   Text,
-  Divider,
   Heading,
-  ButtonGroup,
   Button,
   Image,
 } from "@chakra-ui/react";
@@ -21,7 +17,7 @@ const Item = ({ id, name, category, price, image }) => {
     <>
       <Card key={id} maxW="sm">
         <CardBody>
-          <Image src={remeraImage} alt={name} borderRadius="lg" />
+          <Image src={image} alt={name} borderRadius="lg" />
           <Stack mt="6" spacing="3">
             <Heading size="md">{name}</Heading>
             <Flex justifyContent="space-between">

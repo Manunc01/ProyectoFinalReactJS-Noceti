@@ -28,7 +28,7 @@ const NavBar = () => {
       >
         <Link to = {"/"}>
         <Box ml={3}>
-          <Text as={"a"}fontWeight={"bold"} color={"#50ad6c"} fontSize={"3xl"} href={"#"}>
+          <Text fontWeight={"bold"} color={"#50ad6c"} fontSize={"3xl"}>
             TOVAMA
           </Text>
         </Box>
@@ -61,7 +61,9 @@ const NavBar = () => {
             </Link>
           </MenuList>
         </Menu>
+        <Link to={"/cart"}>
         <CartWidget />
+        </Link>
       </Box>
     </>
   );
