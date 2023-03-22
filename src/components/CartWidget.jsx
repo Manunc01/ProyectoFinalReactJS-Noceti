@@ -6,7 +6,7 @@ import { CartContext } from "../contexts/ShoppingCartContext";
 const CartWidget = () => {
   const [cart, setCart] = useContext(CartContext)
   const prodsQ = cart.length
-  console.log(prodsQ)
+  
   return (
     <Box display="flex" ml={3} mr={3} alignItems={"baseline"}>
       <Button colorScheme={"green"} color={"black"}>

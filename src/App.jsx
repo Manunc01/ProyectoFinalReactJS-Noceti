@@ -6,8 +6,7 @@ import ItemDetailContainer from "./components/ItemDetailContainer";
 import { ShoppingCartProvider } from "./contexts/ShoppingCartContext";
 import Cart from "./components/Cart";
 import SendOrder from "./components/SendOrder";
-import AddClothingItem from "./components/AddClothingItem";
-import ItemList from "./components/ItemList";
+
 
 
 function App() {
