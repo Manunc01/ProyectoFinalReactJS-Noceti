@@ -54,7 +54,7 @@ VITE_FIREBASE_APP_ID=your_app_id
 
 ```javascript
 name: string
-category: string
+category: string // Puedes crear categorias nuevas y se renderizará en el menu de categorias automaticamente.
 description: string
 price: number
 image: string //url de la imagen
