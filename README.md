@@ -67,4 +67,5 @@ stock: number
 
 ¡Listo! Ahora ya puedes utilizar la aplicación de tienda online y realizar compras de manera virtual.
 
-
+## Demostración del funcionamiento
+https://i.ibb.co/Jz345Tt/Tovama-Google-Chrome-2023-03-21-12-43-08.gif
